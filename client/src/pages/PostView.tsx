@@ -87,16 +87,17 @@ export default function PostView() {
 
         <div 
           className="prose prose-lg dark:prose-invert max-w-none
-            prose-headings:text-foreground prose-headings:leading-tight
-            prose-p:text-foreground/90 prose-p:leading-relaxed prose-p:my-3
+            prose-headings:text-foreground prose-headings:leading-snug
+            prose-p:text-foreground/90 prose-p:leading-normal prose-p:my-2
             prose-a:text-primary hover:prose-a:text-primary/80
             prose-strong:text-foreground
             prose-code:text-foreground prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-            prose-pre:bg-muted prose-pre:border prose-pre:border-border
-            prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground
-            prose-li:text-foreground/90 prose-li:my-1
-            prose-hr:border-border
-            [&_*]:leading-normal
+            prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:my-3
+            prose-blockquote:border-l-primary prose-blockquote:text-muted-foreground prose-blockquote:my-2
+            prose-li:text-foreground/90 prose-li:my-0.5
+            prose-ul:my-2 prose-ol:my-2
+            prose-hr:border-border prose-hr:my-4
+            [&_*]:leading-snug
             [&_code]:font-mono [&_pre]:font-mono [&_pre_code]:font-mono"
           dangerouslySetInnerHTML={{ __html: post.html }}
           data-testid="post-content"
