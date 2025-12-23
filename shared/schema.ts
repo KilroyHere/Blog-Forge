@@ -4,9 +4,9 @@ import { z } from "zod";
 export const postSchema = z.object({
   id: z.string().uuid(),
   title: z.string().min(1, "Title is required"),
+  description: z.string(),
   markdown: z.string(),
   html: z.string(),
-  excerpt: z.string(),
   created_at: z.string(),
   updated_at: z.string(),
 });
