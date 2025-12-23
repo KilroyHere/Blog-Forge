@@ -28,9 +28,9 @@ export function PostCard({ post }: PostCardProps) {
       <CardContent className="pb-4">
         <p 
           className="text-sm text-muted-foreground line-clamp-3 leading-relaxed"
-          data-testid={`text-excerpt-${post.id}`}
+          data-testid={`text-description-${post.id}`}
         >
-          {post.excerpt || 'No content yet...'}
+          {post.description || 'No description...'}
         </p>
       </CardContent>
       <CardFooter className="flex items-center justify-between gap-4 pt-0">
