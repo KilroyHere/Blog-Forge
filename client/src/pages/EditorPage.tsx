@@ -6,6 +6,7 @@ import { MarkdownEditor } from '@/components/MarkdownEditor';
 import { SaveIndicator } from '@/components/SaveIndicator';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { queryClient, apiRequest } from '@/lib/queryClient';
@@ -29,6 +30,7 @@ export default function EditorPage() {
   const isEditing = Boolean(params.id);
 
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [markdown, setMarkdown] = useState('');
   const [html, setHtml] = useState('');
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
@@ -42,6 +44,7 @@ export default function EditorPage() {
   useEffect(() => {
     if (existingPost) {
       setTitle(existingPost.title);
+      setDescription(existingPost.description || '');
       setMarkdown(existingPost.markdown);
       setHtml(existingPost.html);
       originalMediaIdsRef.current = extractMediaIds(existingPost.markdown);
@@ -152,18 +155,6 @@ export default function EditorPage() {
     setHtml(newHtml);
   }, []);
 
-  const generateExcerpt = (text: string): string => {
-    const plainText = text
-      .replace(/#{1,6}\s/g, '')
-      .replace(/\*\*|__/g, '')
-      .replace(/\*|_/g, '')
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      .replace(/`{1,3}[^`]*`{1,3}/g, '')
-      .replace(/\n/g, ' ')
-      .trim();
-    return plainText.slice(0, 150) + (plainText.length > 150 ? '...' : '');
-  };
-
   const handleSave = () => {
     if (!title.trim()) {
       toast({
@@ -177,9 +168,9 @@ export default function EditorPage() {
     setSaveStatus('saving');
     const postData: InsertPost = {
       title: title.trim(),
+      description: description.trim(),
       markdown,
       html,
-      excerpt: generateExcerpt(markdown),
     };
 
     if (isEditing) {
@@ -213,7 +204,7 @@ export default function EditorPage() {
     <div className="min-h-screen bg-background">
       <Header showBack title={isEditing ? 'Edit Post' : 'New Post'} />
       <main className="max-w-4xl mx-auto px-6 py-8">
-        <div className="mb-6">
+        <div className="mb-4">
           <Input
             type="text"
             placeholder="Post title..."
@@ -221,6 +212,17 @@ export default function EditorPage() {
             onChange={(e) => setTitle(e.target.value)}
             className="text-3xl font-bold border-0 border-b border-border rounded-none px-0 py-3 focus-visible:ring-0 focus-visible:border-primary bg-transparent placeholder:text-muted-foreground/50"
             data-testid="input-title"
+          />
+        </div>
+
+        <div className="mb-6">
+          <Textarea
+            placeholder="A brief description of your post..."
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="resize-none border-0 border-b border-border rounded-none px-0 py-2 focus-visible:ring-0 focus-visible:border-primary bg-transparent placeholder:text-muted-foreground/50 text-muted-foreground min-h-[60px]"
+            rows={2}
+            data-testid="input-description"
           />
         </div>
 
