@@ -19,9 +19,8 @@ A self-hostable blog application with a distraction-free markdown editing experi
 - **Frontend**: React, TypeScript, Tailwind CSS, shadcn/ui
 - **Editor**: TUI Editor (Toast UI) with plugins
 - **Syntax Highlighting**: Prism.js (18+ languages)
-- **Backend**: Express.js (development) / Vercel Serverless Functions (production)
+- **Backend**: Express.js
 - **Database**: Supabase (PostgreSQL)
-- **Deployment**: Vercel via GitHub Actions
 
 ## Quick Start
 
@@ -30,12 +29,12 @@ A self-hostable blog application with a distraction-free markdown editing experi
 - Node.js 20+
 - A Supabase account and project
 
-### Local Development
+### Setup
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/KilroyHere/blog-editor.git
-   cd blog-editor
+   git clone https://github.com/KilroyHere/Blog-Forge.git
+   cd Blog-Forge
    ```
 
 2. Install dependencies:
@@ -91,36 +90,6 @@ A self-hostable blog application with a distraction-free markdown editing experi
 
 6. Open http://localhost:5000
 
-## Deploy to Vercel
-
-### Option 1: Deploy via Vercel Dashboard
-
-1. Go to [vercel.com/new](https://vercel.com/new)
-
-2. Import this GitHub repository
-
-3. Add environment variables:
-   | Name | Value |
-   |------|-------|
-   | `SUPABASE_URL` | Your Supabase project URL |
-   | `SUPABASE_ANON_KEY` | Your Supabase anon key |
-   | `VITE_SUPABASE_URL` | Same as SUPABASE_URL |
-   | `VITE_SUPABASE_ANON_KEY` | Same as SUPABASE_ANON_KEY |
-
-4. Click Deploy
-
-### Option 2: Deploy via GitHub Actions
-
-This repository includes a GitHub Actions workflow (`.github/workflows/deploy.yml`) that automatically deploys to Vercel on push to `main`.
-
-To set it up:
-1. Add these secrets to your GitHub repository:
-   - `VERCEL_TOKEN` - Your Vercel API token
-   - `VERCEL_ORG_ID` - Your Vercel organization ID
-   - `VERCEL_PROJECT_ID` - Your Vercel project ID
-
-2. Push to the `main` branch to trigger deployment
-
 ## Image Upload
 
 Images added to posts are automatically:
@@ -134,21 +103,18 @@ Supported formats: JPEG, PNG, GIF, WebP, MP4, WebM (max 10MB)
 ## Project Structure
 
 ```
-blog-editor/
-├── api/                    # Vercel serverless API handler
-│   └── index.ts            # Single handler for all API routes
+Blog-Forge/
 ├── client/                 # React frontend
 │   └── src/
 │       ├── components/     # UI components (MarkdownEditor, Header, etc.)
 │       ├── pages/          # Page components (Dashboard, EditorPage, PostView)
 │       └── lib/            # Utilities
-├── server/                 # Express backend (development)
+├── server/                 # Express backend
 │   └── routes.ts           # API routes
-├── shared/                 # Shared code
-│   ├── schema.ts           # Data types and validation (posts, media)
-│   ├── supabase.ts         # Database client
-│   └── services/           # Business logic
-└── vercel.json             # Vercel configuration
+└── shared/                 # Shared code
+    ├── schema.ts           # Data types and validation (posts, media)
+    ├── supabase.ts         # Database client
+    └── services/           # Business logic
 ```
 
 ## API Endpoints
