@@ -110,11 +110,14 @@ Blog-Forge/
 │       ├── pages/          # Page components (Dashboard, EditorPage, PostView)
 │       └── lib/            # Utilities
 ├── server/                 # Express backend
-│   └── routes.ts           # API routes
+│   ├── lib/
+│   │   └── supabase.ts     # Database client
+│   ├── services/
+│   │   ├── posts.ts        # Post CRUD operations
+│   │   └── media.ts        # Media upload/retrieval
+│   └── routes.ts           # API route handlers
 └── shared/                 # Shared code
-    ├── schema.ts           # Data types and validation (posts, media)
-    ├── supabase.ts         # Database client
-    └── services/           # Business logic
+    └── schema.ts           # Data types and validation
 ```
 
 ## API Endpoints
