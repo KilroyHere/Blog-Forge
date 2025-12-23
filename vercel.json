@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npx vite build",
+  "buildCommand": "npx vite build --config vite.config.vercel.js",
   "outputDirectory": "dist/public",
   "framework": null,
   "installCommand": "npm install",
