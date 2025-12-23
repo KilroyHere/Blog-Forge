@@ -96,9 +96,10 @@ export default function PostView() {
             prose-ul:my-2 prose-ol:my-2
             prose-hr:border-border prose-hr:my-4
             [&_*]:leading-snug
-            [&_code]:font-mono [&_code]:bg-secondary [&_code]:text-foreground [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded
+            [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:bg-secondary [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:rounded
             [&_pre]:bg-secondary [&_pre]:border [&_pre]:border-border [&_pre]:my-3 [&_pre]:font-mono
-            [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:font-mono"
+            [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:font-mono [&_pre_code]:border-0
+            [&_pre_*]:bg-transparent [&_pre_*]:border-0 [&_pre_*]:p-0"
           dangerouslySetInnerHTML={{ __html: post.html }}
           data-testid="post-content"
         />
